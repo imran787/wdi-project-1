@@ -1,3 +1,29 @@
-body {
-  background: blue;
+
+
+#game-board {
+  width: 200%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  margin-top: -100px;
+  height: 100px;
+  margin-left: 500px;
+  padding: 20px;
+}
+
+.grid-holder {
+    width: 100%;
+  }
+
+.row {
+    clear: left;
+    /*background-color: red;*/
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    float: left;
 }
