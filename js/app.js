@@ -50,7 +50,7 @@ $(() => {
         for (let j = 0; j < num; j++) {
           const cell = document.createElement('div');
           cell.classList.add('cell');
-          cell.setAttribute('id',idSetter);
+          cell.setAttribute('data-id',idSetter);
           idSetter++;
 
 
@@ -93,71 +93,49 @@ $(() => {
       // console.log('finished');
     }, 2000);
 
-    const $divGrid = $('.cell');
+    const $divGrid = $('.cell[data-id="1"]');
     //
-    $divGrid.on('click', function(){
+    $divGrid.on('click', clearCell);
+
+
+
+
+    function clearCell(){
+      console.log($(this).attr('data-id'));
+      checkAdjacentPossibilities($(this).attr('data-id'));
       if ($(this).hasClass('bomb-hidden')) {
         $(this).removeClass('bomb-hidden');
         $(this).addClass('bomb-exposed');
         console.log('hit a bomb!!');
-        // $divGrid.toggle('explosion');
-        // $(this).siblings().css('background-color', 'blue');
       } else {
         $(this).addClass('reveal');
       }
+    }
 
-    });
-
-    // //func to create number of tiles and assign them to game board.
-    // const gridCreate = function (num) {
-    //   const grid = document.getElementById('grid-holder');
-    //   const numOfObstacles = 17;
-    //   const arrayOfObstacles = [];
-    //   var idSetter = 1;
-    //
-    //   for (let i = 0; i < numOfObstacles; i++) {
-    //     const randomNum = Math.floor(Math.random() * num);
-    //     const randomCell = Math.floor(Math.random() * num);
-    //     const arr = [randomNum,randomCell];
-    //     arrayOfObstacles[i] = arr;
-    //   }
-    //   // creates col + rows and randomly assigns obstacles to positions.
-    //   for (let i = 0; i < num; i++) {
-    //
-    //     const row = document.createElement('div');
-    //     row.classList.add('row');
-    //     // row.setAttribute('id', i);
-    //     grid.appendChild(row);
-    //
-    //     for (let j = 0; j < num; j++) {
-    //       const cell = document.createElement('div');
-    //       cell.classList.add('cell');
-    //       cell.setAttribute('id',idSetter);
-    //       idSetter++;
-    //
-    //
-    //       // const $eq = $('div').eq(4).css('background-color', 'black');
-    //       // console.log($eq);
-    //
-    //
-    //       //randomly assigns obstacles to created grid
-    //       for (let n = 0; n < arrayOfObstacles.length; n++) {
-    //         const newArr = arrayOfObstacles[n];
-    //         if(newArr[0] === i && newArr[1] === j) {
-    //           // cell.style.backgroundColor = 'red';
-    //           cell.classList.add('bomb-hidden');
-    //           // cell.className = 'bomb';
-    //         }
-    //       }
-    //       row.appendChild(cell);
-    //     }
-    //   }
-    // };
-    //end of start event
+    // fucntion to check adjacent cells and limit move only to cross
+    function checkAdjacentPossibilities(id){
+      var rows = 10;
+      // var cols = 9;
+      var i = parseInt(id);
+      $('.cell[data-id="'+(i-rows)+'"]').on('click', clearCell);
+      (i-1) % rows === 0 || $('.cell[data-id="'+(i-1)+'"]').on('click', clearCell);
+      i % rows === 0 || $('.cell[data-id="'+(i+1)+'"]').on('click', clearCell);
+      $('.cell[data-id="'+(i+rows)+'"]').on('click', clearCell);
+    }
   });
+
+
+
 });
 
-
+//
+//
+//
+// $(document).on('click', '.cell', function(){
+//   var $this  = $(this);
+//   var id = $this.attr('data-id');
+//   checkAdjacentPossibilities(id);
+// });
 
 
 
