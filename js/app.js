@@ -26,43 +26,6 @@ $(() => {
 
   $('#startGame').on('click',function(){
 
-
-
-    //set to hide tiles in the beginning
-    gridCreate(10);
-
-    //on click we want to show blocks that are underneath.
-    // $('#grid-holder').css('display','inline-block');
-    const $bombCells = $('.bomb-hidden');
-    // setting timeout to reveal all tiles on loading of game.
-    setTimeout(function() {
-      for (var i = 0; i < $bombCells.length; i++) {
-        // $bombCells.css('background-color', 'blue');
-        //adding class to reveal for one sec
-        $bombCells.addClass('covering-top');
-      }
-    }, 1000);
-
-    setTimeout(function(){
-      $bombCells.removeClass('covering-top');
-      // console.log('finished');
-    }, 2000);
-
-    const $divGrid = $('.cell');
-    //
-    $divGrid.on('click', function(){
-      if ($(this).hasClass('bomb-hidden')) {
-        $(this).removeClass('bomb-hidden');
-        $(this).addClass('bomb-exposed');
-        console.log('hit a bomb!!');
-        // $divGrid.toggle('explosion');
-        // $(this).siblings().css('background-color', 'blue');
-      } else {
-        $(this).addClass('reveal');
-      }
-
-    });
-
     //func to create number of tiles and assign them to game board.
     const gridCreate = function (num) {
       const grid = document.getElementById('grid-holder');
@@ -108,6 +71,88 @@ $(() => {
         }
       }
     };
+
+
+    //set to hide tiles in the beginning
+    gridCreate(10);
+
+    //on click we want to show blocks that are underneath.
+    // $('#grid-holder').css('display','inline-block');
+    const $bombCells = $('.bomb-hidden');
+    // setting timeout to reveal all tiles on loading of game.
+    setTimeout(function() {
+      for (var i = 0; i < $bombCells.length; i++) {
+        // $bombCells.css('background-color', 'blue');
+        //adding class to reveal for one sec
+        $bombCells.addClass('covering-top');
+      }
+    }, 1000);
+
+    setTimeout(function(){
+      $bombCells.removeClass('covering-top');
+      // console.log('finished');
+    }, 2000);
+
+    const $divGrid = $('.cell');
+    //
+    $divGrid.on('click', function(){
+      if ($(this).hasClass('bomb-hidden')) {
+        $(this).removeClass('bomb-hidden');
+        $(this).addClass('bomb-exposed');
+        console.log('hit a bomb!!');
+        // $divGrid.toggle('explosion');
+        // $(this).siblings().css('background-color', 'blue');
+      } else {
+        $(this).addClass('reveal');
+      }
+
+    });
+
+    // //func to create number of tiles and assign them to game board.
+    // const gridCreate = function (num) {
+    //   const grid = document.getElementById('grid-holder');
+    //   const numOfObstacles = 17;
+    //   const arrayOfObstacles = [];
+    //   var idSetter = 1;
+    //
+    //   for (let i = 0; i < numOfObstacles; i++) {
+    //     const randomNum = Math.floor(Math.random() * num);
+    //     const randomCell = Math.floor(Math.random() * num);
+    //     const arr = [randomNum,randomCell];
+    //     arrayOfObstacles[i] = arr;
+    //   }
+    //   // creates col + rows and randomly assigns obstacles to positions.
+    //   for (let i = 0; i < num; i++) {
+    //
+    //     const row = document.createElement('div');
+    //     row.classList.add('row');
+    //     // row.setAttribute('id', i);
+    //     grid.appendChild(row);
+    //
+    //     for (let j = 0; j < num; j++) {
+    //       const cell = document.createElement('div');
+    //       cell.classList.add('cell');
+    //       cell.setAttribute('id',idSetter);
+    //       idSetter++;
+    //
+    //
+    //       // const $eq = $('div').eq(4).css('background-color', 'black');
+    //       // console.log($eq);
+    //
+    //
+    //       //randomly assigns obstacles to created grid
+    //       for (let n = 0; n < arrayOfObstacles.length; n++) {
+    //         const newArr = arrayOfObstacles[n];
+    //         if(newArr[0] === i && newArr[1] === j) {
+    //           // cell.style.backgroundColor = 'red';
+    //           cell.classList.add('bomb-hidden');
+    //           // cell.className = 'bomb';
+    //         }
+    //       }
+    //       row.appendChild(cell);
+    //     }
+    //   }
+    // };
     //end of start event
   });
 });
