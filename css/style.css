@@ -1,49 +1,41 @@
 body{
-/*background-image: url("https://cdn.shutterstock.com/shutterstock/videos/5115842/thumb/1.jpg");*/
-background-size:     cover;
-background-repeat:   no-repeat;
-background-position: center;
-font-family: 'Press Start 2P', cursive;
+  /*background-image: url("https://cdn.shutterstock.com/shutterstock/videos/5115842/thumb/1.jpg");*/
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
 }
+
 header {
   text-content: center;
 }
-#game-board {
-  width: 50%;
-  display: block;
-  position: absolute;
-  top: 50%;
-  bottom: 50%;
-  margin-top: -100px;
-  height: 100px;
-  margin-left: 500px;
-  padding: 20px;
 
+#game-board {
+  margin: 0 auto;
+  width: 540px;
 }
 
 .grid-holder {
-    width: 50%;
-    /*display: none;*/
-    margin: 0 auto;
-  }
+  width: 50%;
+  margin: 0 auto;
+}
 
 .row {
-    clear: left;
-    /*background-color: red;*/
+  clear: left;
 }
 
 .cell {
-    width: 50px;
-    height: 50px;
-    border: 2px solid #ADD8E6;
-    float: left;
-    background-color: purple;
-    border-radius: 5px;
-    background-image: url("https://i.warosu.org/data/vr/img/0033/92/1469810362787.png");
-    /*background-image: url("http://data.whicdn.com/images/124620574/original.jpg");*/
-    background-size:     cover;
-    background-repeat:   no-repeat;
-    background-position: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ADD8E6;
+  float: left;
+  background-color: purple;
+  border-radius: 5px;
+  background-image: url("https://i.warosu.org/data/vr/img/0033/92/1469810362787.png");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center;
 }
 
 .cell:hover{
@@ -51,29 +43,40 @@ header {
   border-radius: 10px;
   border: 2.5px solid #00FFFF;
 }
+
 .bomb-exposed {
   background-color: red;
   background-image: url("http://pngimages.net/sites/default/files/bomb-cool-emots-png-image-49453.png");
 }
+
 .bomb-hidden {
   /*background-color: purple;*/
 }
-.covering-top {
 
+.covering-top {
   background-image: url("http://pngimages.net/sites/default/files/bomb-cool-emots-png-image-49453.png");
 }
+
 .reveal{
   background-color: white;
   background-image: url();
 }
+
 .revealB {
   background-color: blue;
 }
+
 .door{
   background-image: url("http://data.whicdn.com/images/124620574/original.jpg");
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: center;
+}
+
+.flash {
+  background-color: rgba(102,51,153,0.5);
+  border-radius: 10px;
+  border: 2.5px solid #00FFFF;
 }
 
 #seconds {
