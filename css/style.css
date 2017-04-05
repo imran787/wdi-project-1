@@ -72,3 +72,7 @@ font-family: 'Press Start 2P', cursive;
   background-repeat:   no-repeat;
   background-position: center;
 }
+
+#seconds {
+  font-family: 'Orbitron', sans-serif;
+}

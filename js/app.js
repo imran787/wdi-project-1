@@ -27,9 +27,13 @@ $(() => {
 
 
   $('#startGame').on('click',function(){
+    //set to hide tiles in the beginning
+
+
 
 
     //func to create number of tiles and assign them to game board.
+
     const gridCreate = function (num) {
       const grid = document.getElementById('grid-holder');
       const numOfObstacles = 17;
@@ -75,24 +79,26 @@ $(() => {
       }
     };
 
-    // let $sec = 0;
-    // function time(x) {
-    //   return x > 9 ? x : '0' + x;
-    // }
+
+    let $sec = 500;
+    const counter = setInterval(time, 1000);
+    function time() {
+      $sec --;
+      if($sec === 500 ){
+        clearInterval(counter);
+      }
+      $('#seconds').html($sec);
+    }
     // var timer = setInterval(function () {
     //   $('#seconds').innerHTML = time(++$sec % 60);
     //   $('#minutes').innerHTML = time(parseInt($sec / 60, 10));
     // }, 1000);
     //
-    // //called on game end
-    // setTimeout(function () {
-    //   clearInterval(timer);
-    // }, 11000);
 
 
 
-    //set to hide tiles in the beginning
     gridCreate(10);
+    time();
 
 
     //on click we want to show blocks that are underneath.
@@ -119,19 +125,21 @@ $(() => {
 
 
 
-    //adding
+    //looking to see if a bomb has been hit
     $divGrid.on('click', clearCell);
     function clearCell(){
 
       console.log($(this).attr('data-id'));
       checkAdjacentPossibilities($(this).attr('data-id'));
-      currentSelected($(this));
+      // currentSelected($(this));
       if ($(this).hasClass('bomb-hidden')) {
         $(this).removeClass('bomb-hidden');
         $(this).addClass('bomb-exposed');
         console.log('hit a bomb!!');
+        clearInterval(counter);
+        $('#seconds').html('000');
 
-        // resetGame();
+        // gameOver();
       } else {
         $(this).addClass('reveal');
       }
@@ -152,26 +160,26 @@ $(() => {
     }
 
     //restricting moves..
-    function currentSelected(e){
-      //clear current selection
-      //add new class to current block?
-      const $currentMove = $(e.target);
-      console.log($currentMove);
-      const $moveId = parseInt($currentMove.attr('id'));
-
-      if($('#'+ $moveId).hasClass('cell')){
-        $('#' + ($moveId + 1)).addClass('revealB');
-        $('#' + ($moveId -1)).addClass('revealB');
-      } else {
-        console.log('error');
-      }
-
-    }
+    // function currentSelected(e){
+    //   //clear current selection
+    //   //add new class to current block?
+    //   const $currentMove = $(e.target);
+    //   console.log($currentMove);
+    //   const $moveId = parseInt($currentMove.attr('id'));
+    //
+    //   if($('#'+ $moveId).hasClass('cell')){
+    //     $('#' + ($moveId + 1)).addClass('revealB');
+    //     $('#' + ($moveId -1)).addClass('revealB');
+    //   } else {
+    //     console.log('error');
+    //   }
+    //
+    // }
 
     // function gameOver(){
-    //   if($(this).hasClass('bomb-exposed'){
-    //
-    //   })
+    //   // if($(this).hasClass('bomb-exposed'){
+    //   //   console.log('game over');
+    //   // })
     // }
 
 
