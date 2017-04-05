@@ -12,6 +12,8 @@ $(() => {
   //limit player moves only to adjacent tiles (r,l,u,d,and diagonal);
   //minimum of 2 tiles to chose max of 7.
 
+  //find a way to limit moves only to active position
+
   //start point last col left top5, end first col right bot5;
   //game win logic!
 
@@ -25,6 +27,7 @@ $(() => {
 
 
   $('#startGame').on('click',function(){
+
 
     //func to create number of tiles and assign them to game board.
     const gridCreate = function (num) {
@@ -72,9 +75,25 @@ $(() => {
       }
     };
 
+    // let $sec = 0;
+    // function time(x) {
+    //   return x > 9 ? x : '0' + x;
+    // }
+    // var timer = setInterval(function () {
+    //   $('#seconds').innerHTML = time(++$sec % 60);
+    //   $('#minutes').innerHTML = time(parseInt($sec / 60, 10));
+    // }, 1000);
+    //
+    // //called on game end
+    // setTimeout(function () {
+    //   clearInterval(timer);
+    // }, 11000);
+
+
 
     //set to hide tiles in the beginning
     gridCreate(10);
+
 
     //on click we want to show blocks that are underneath.
     // $('#grid-holder').css('display','inline-block');
@@ -94,39 +113,84 @@ $(() => {
     }, 2000);
 
     const $divGrid = $('.cell[data-id="1"]');
-    //
+    $divGrid.addClass('door');
+    const $boardEnd = $('.cell[data-id="100"]');
+    $boardEnd.addClass('door');
+
+
+
+    //adding
     $divGrid.on('click', clearCell);
-
-
-
-
     function clearCell(){
+
       console.log($(this).attr('data-id'));
       checkAdjacentPossibilities($(this).attr('data-id'));
+      currentSelected($(this));
       if ($(this).hasClass('bomb-hidden')) {
         $(this).removeClass('bomb-hidden');
         $(this).addClass('bomb-exposed');
         console.log('hit a bomb!!');
+
+        // resetGame();
       } else {
         $(this).addClass('reveal');
       }
     }
 
-    // fucntion to check adjacent cells and limit move only to cross
+    // fucntion to check adjacent cells and limit move only to cross, but works on all cells
     function checkAdjacentPossibilities(id){
+
       var rows = 10;
       // var cols = 9;
       var i = parseInt(id);
+
       $('.cell[data-id="'+(i-rows)+'"]').on('click', clearCell);
       (i-1) % rows === 0 || $('.cell[data-id="'+(i-1)+'"]').on('click', clearCell);
       i % rows === 0 || $('.cell[data-id="'+(i+1)+'"]').on('click', clearCell);
       $('.cell[data-id="'+(i+rows)+'"]').on('click', clearCell);
+
     }
+
+    //restricting moves..
+    function currentSelected(e){
+      //clear current selection
+      //add new class to current block?
+      const $currentMove = $(e.target);
+      console.log($currentMove);
+      const $moveId = parseInt($currentMove.attr('id'));
+
+      if($('#'+ $moveId).hasClass('cell')){
+        $('#' + ($moveId + 1)).addClass('revealB');
+        $('#' + ($moveId -1)).addClass('revealB');
+      } else {
+        console.log('error');
+      }
+
+    }
+
+    // function gameOver(){
+    //   if($(this).hasClass('bomb-exposed'){
+    //
+    //   })
+    // }
+
+
+
   });
 
-
-
 });
+//////resetGame
+
+// $('.').on('click', function(){
+//   console.log('end game');
+// });
+
+// timer to start game - record time and store in leaderboard.
+
+
+
+
+
 
 //
 //

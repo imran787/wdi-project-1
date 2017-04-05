@@ -2,7 +2,7 @@ body{
 /*background-image: url("https://cdn.shutterstock.com/shutterstock/videos/5115842/thumb/1.jpg");*/
 background-size:     cover;
 background-repeat:   no-repeat;
-background-position: center center;
+background-position: center;
 font-family: 'Press Start 2P', cursive;
 }
 
@@ -62,4 +62,13 @@ font-family: 'Press Start 2P', cursive;
 .reveal{
   background-color: white;
   background-image: url();
+}
+.revealB {
+  background-color: blue;
+}
+.door{
+  background-image: url("http://data.whicdn.com/images/124620574/original.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center;
 }
