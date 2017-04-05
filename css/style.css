@@ -5,9 +5,11 @@ background-repeat:   no-repeat;
 background-position: center;
 font-family: 'Press Start 2P', cursive;
 }
-
+header {
+  text-content: center;
+}
 #game-board {
-  width: 200%;
+  width: 50%;
   display: block;
   position: absolute;
   top: 50%;
@@ -20,8 +22,9 @@ font-family: 'Press Start 2P', cursive;
 }
 
 .grid-holder {
-    width: 200px;
-    display: none;
+    width: 50%;
+    /*display: none;*/
+    margin: 0 auto;
   }
 
 .row {

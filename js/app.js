@@ -21,7 +21,7 @@ $(() => {
 
   // each level up would add shake event
 
-
+  let counter;
 
   // const $one = $('.one');
 
@@ -29,16 +29,16 @@ $(() => {
   $('#startGame').on('click',function(){
     //set to hide tiles in the beginning
 
-
+    clearInterval(counter);
 
 
     //func to create number of tiles and assign them to game board.
 
-    const gridCreate = function (num) {
+    function gridCreate(num) {
       const grid = document.getElementById('grid-holder');
       const numOfObstacles = 17;
       const arrayOfObstacles = [];
-      var idSetter = 1;
+      let idSetter = 1;
 
       for (let i = 0; i < numOfObstacles; i++) {
         const randomNum = Math.floor(Math.random() * num);
@@ -46,9 +46,9 @@ $(() => {
         const arr = [randomNum,randomCell];
         arrayOfObstacles[i] = arr;
       }
+
       // creates col + rows and randomly assigns obstacles to positions.
       for (let i = 0; i < num; i++) {
-
         const row = document.createElement('div');
         row.classList.add('row');
         // row.setAttribute('id', i);
@@ -77,25 +77,19 @@ $(() => {
           row.appendChild(cell);
         }
       }
-    };
+    }
 
 
-    let $sec = 500;
-    const counter = setInterval(time, 1000);
+    let $sec = 0;
+    counter = setInterval(time, 1000);
+
     function time() {
-      $sec --;
-      if($sec === 500 ){
+      $sec ++;
+      if($sec === 0 ){
         clearInterval(counter);
       }
       $('#seconds').html($sec);
     }
-    // var timer = setInterval(function () {
-    //   $('#seconds').innerHTML = time(++$sec % 60);
-    //   $('#minutes').innerHTML = time(parseInt($sec / 60, 10));
-    // }, 1000);
-    //
-
-
 
     gridCreate(10);
     time();
@@ -123,21 +117,27 @@ $(() => {
     const $boardEnd = $('.cell[data-id="100"]');
     $boardEnd.addClass('door');
 
-
-
     //looking to see if a bomb has been hit
     $divGrid.on('click', clearCell);
-    function clearCell(){
 
+    function clearCell(){
       console.log($(this).attr('data-id'));
       checkAdjacentPossibilities($(this).attr('data-id'));
+
       // currentSelected($(this));
       if ($(this).hasClass('bomb-hidden')) {
         $(this).removeClass('bomb-hidden');
         $(this).addClass('bomb-exposed');
-        console.log('hit a bomb!!');
+        // console.log('hit a bomb!!');
         clearInterval(counter);
         $('#seconds').html('000');
+        //clears board on hitting a bomb
+        $('#grid-holder').empty();
+        $('#game-message').html('Bang Bang!');
+        $('#message').html(` You just took ${$sec} seconds..Pathetic!!`);
+
+
+        //reset game board
 
         // gameOver();
       } else {
