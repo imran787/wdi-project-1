@@ -12,6 +12,7 @@
 //game win logic!
 // each level up would add shake event
 
+
 let $divGrid;
 let $boardEnd;
 let $start;
@@ -30,7 +31,7 @@ let seconds;
 let arrayOfObstacles;
 let idSetter;
 const width = 10;
-const numOfObstacles = 18;
+const numOfObstacles = 24;
 const numOfSweets = 2;
 
 let arrayOfSweets;
@@ -93,7 +94,7 @@ function start() {
   }, 3500);
 
   $boardEnd = $('.cell[data-id="100"]');
-  $boardEnd.addClass('door');
+  $boardEnd.addClass('door_close');
 
   $divGrid = $('.cell[data-id="1"]');
   $divGrid.addClass('door');
@@ -224,7 +225,7 @@ function moveCharacter(e) {
 
     //reset game board
     // gameOver();
-  } else if($you.hasClass('door')){
+  } else if($you.hasClass('door_close')){
     clearInterval(counter);
     $seconds.html('');
     $message.html(` You took ${seconds} seconds to get to the promised land...All hail you!!`);

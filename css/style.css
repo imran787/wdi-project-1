@@ -1,22 +1,36 @@
 body{
-  background-image: url('https://image.freepik.com/free-vector/abstact-pixelated-background_1048-1042.jpg');
-
-  background-size:     cover;
-  background-repeat:   no-repeat;
-  background-position: center;
-  font-family: 'Press Start 2P', cursive;
+  /*background-image: url('https://image.freepik.com/free-vector/abstact-pixelated-background_1048-1042.jpg');*/
+   background: url('https://static.vecteezy.com/system/resources/previews/000/115/493/original/free-vector-colored-degraded-background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /*font-family: 'Press Start 2P', cursive;*/
+  font-family: 'Bungee Hairline', cursive;
   text-align: center;
 }
 
+#seconds{
+  color: black;
+}
 header {
   text-content: center;
   padding: 0;
+  font-weight: bolder;
+
+}
+h1{
+  font-weight: bold;
+  color: white;
+
 }
 
 #game-board {
   margin: 0 auto;
   width: 540px;
+
 }
+
 
 .grid-holder {
   width: 50%;
@@ -31,9 +45,9 @@ header {
 .cell {
   width: 50px;
   height: 50px;
-  border: 2px solid #ADD8E6;
+  border: 2px solid #d4b5ff;
   float: left;
-  background-color: white;
+  background-color: red;
   border-radius: 5px;
   background-image: url("https://i.warosu.org/data/vr/img/0033/92/1469810362787.png");
   background-size:     cover;
@@ -48,7 +62,7 @@ header {
 }
 
 .bomb-exposed {
-  /*background-color: red;*/
+
   background-image: url("http://pngimages.net/sites/default/files/bomb-cool-emots-png-image-49453.png");
 }
 
@@ -61,8 +75,8 @@ header {
 }
 
 .reveal{
-  background-color: white;
-  /*background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/28/Astro_4D_stars_proper_radial_g_rb_8mag_big.png');*/*/
+  background-color: red;
+
 }
 
 .revealB {
@@ -76,6 +90,15 @@ header {
   background-repeat:   no-repeat;
   background-position: center;
 }
+
+.door_close {
+
+  background-image: url("http://vignette3.wikia.nocookie.net/fantendo/images/9/99/Super_mario_world_door.png/revision/latest?cb=20120822131116");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center;
+}
+
 
 .flash {
   background-color: rgba(102,51,153,0.5);
@@ -93,20 +116,22 @@ header {
   padding: 5px;
   border-radius: 10px;
   /*border: 2px solid #fff200;
-  background-color: white;
   color: #fff200;*/
   font-family: Orbitron;
+  width: 100px;
+  color: black;
+  background-color: #b0ff99;
 }
 
 .sweet {
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: center;
-  /*border-color: red;*/
+
 
 }
 
 .sweetReveal {
-  background-color: white;
+  background-color: yellow;
   background-image: url('https://img.clipartfest.com/3fab55792d6c70e2c0c469e587a93c17_candy-clip-art-at-clker-com-sweets-clipart_600-450.png');
 }
