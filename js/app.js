@@ -23,14 +23,21 @@ let $gameMessage;
 let $message;
 let $you;
 let $cells;
-
+let $sweets;
 // let cellsArray;
 let counter;
 let seconds;
 let arrayOfObstacles;
 let idSetter;
 const width = 10;
-const numOfObstacles = 17;
+const numOfObstacles = 18;
+const numOfSweets = 2;
+
+let arrayOfSweets;
+
+
+
+
 
 $(init);
 
@@ -41,12 +48,19 @@ function init() {
   $seconds     = $('#seconds');
   $gameMessage = $('#game-message');
   $message     = $('#message');
+  $sweets      = $('.sweet');
 
   // Setup eventListeners
   $start.on('click', start);
   // $body.on('click', '.cell[data-id="1"]', clearCell);
 
   $(document).keydown(moveCharacter);
+
+  const sound1 = document.getElementById('sound1');
+  sound1.src = './sounds/80s-music-synth-pop.mp3';
+  sound1.play();
+
+
 }
 
 function start() {
@@ -59,18 +73,24 @@ function start() {
 
   // on click we want to show blocks that are underneath.
   $bombCells = $('.bomb-hidden');
+  $sweets = $('.sweet');
 
   // setting timeout to reveal all tiles on loading of game.
   setTimeout(function() {
     for (var i = 0; i < $bombCells.length; i++) {
       //adding class to reveal for one sec
       $bombCells.addClass('covering-top');
+      $sweets.removeClass('sweet');
+      $sweets.addClass('sweetReveal');
+
     }
   }, 1000);
 
   setTimeout(function(){
     $bombCells.removeClass('covering-top');
-  }, 2000);
+    $sweets.addClass('sweet');
+    $sweets.removeClass('sweetReveal');
+  }, 3500);
 
   $boardEnd = $('.cell[data-id="100"]');
   $boardEnd.addClass('door');
@@ -85,8 +105,10 @@ function start() {
 
 function gridCreate(num) {
   $grid = $('#grid-holder');
-
+  $grid.empty();
   arrayOfObstacles = [];
+  arrayOfSweets = [];
+
   idSetter = 1;
 
   for (let i = 0; i < numOfObstacles; i++) {
@@ -95,6 +117,25 @@ function gridCreate(num) {
     const arr = [randomNum,randomCell];
     arrayOfObstacles[i] = arr;
   }
+
+  for (var i = 0; i < numOfSweets; i++) {
+    const randomNum = Math.floor(Math.random() * num);
+    const randomCell = Math.floor(Math.random() * num);
+    const arr = [randomNum,randomCell];
+    arrayOfSweets[i] = arr;
+  }
+  //create random points to reveal obstacles momentarily
+
+
+
+  // for(let i = 0; i < arrayOfHelp; i++){
+  //   const randomHelp = Math.floor(Math.random() * num);
+  //   const arr2  =[randomHelp];
+  //   arrayOfHelp[i] = arr2;
+  //   console.log(arrayOfHelp[i]);
+  // }
+
+
 
   // creates col + rows and randomly assigns obstacles to positions.
   for (let i = 0; i < num; i++) {
@@ -110,6 +151,13 @@ function gridCreate(num) {
         const newArr = arrayOfObstacles[n];
         if (newArr[0] === i && newArr[1] === j) {
           $cell.addClass('bomb-hidden');
+        }
+      }
+      for (let m = 0; m < arrayOfSweets.length; m++) {
+        const newArr = arrayOfSweets[m];
+        if (newArr[0] === i && newArr[1] === j) {
+          $cell.addClass('sweet');
+          // console.log(`sweet added at row ${newArr[0]}, cell ${newArr[1]}`);
         }
       }
       $row.append($cell);
@@ -157,6 +205,8 @@ function moveCharacter(e) {
   $you.removeClass('flash');
   $you = $($cells.get(newIndex));
   $you.addClass('flash');
+  $bombCells = $('.bomb-hidden');
+
 
   if ($you.hasClass('bomb-hidden')) {
     $you.removeClass('bomb-hidden');
@@ -164,16 +214,53 @@ function moveCharacter(e) {
 
     // console.log('hit a bomb!!');
     clearInterval(counter);
-    $seconds.html('000');
+    $seconds.html('');
 
     //clears board on hitting a bomb
     $grid.empty();
     $gameMessage.html('Bang Bang!');
     $message.html(` You just took ${seconds} seconds..Pathetic!!`);
+    $('#startGame').html('Restart?');
 
     //reset game board
     // gameOver();
+  } else if($you.hasClass('door')){
+    clearInterval(counter);
+    $seconds.html('');
+    $message.html(` You took ${seconds} seconds to get to the promised land...All hail you!!`);
+    $grid.empty();
+    $gameMessage.html('OMG! OMG!! OMG!!!');
+    $('#startGame').html('Play Again?');
   } else {
     $you.addClass('reveal');
   }
+
+  if($you.hasClass('sweet')){
+    // $you.addClass('reveal');
+    setTimeout(function() {
+      for (var i = 0; i < $bombCells.length; i++) {
+        //adding class to reveal for one sec
+        $bombCells.addClass('covering-top');
+        $sweets.removeClass('sweet');
+        $sweets.addClass('sweetReveal');
+      }
+    }, 1000);
+
+    setTimeout(function(){
+      $bombCells.removeClass('covering-top');
+      $sweets.addClass('sweet');
+      $sweets.removeClass('sweetReveal');
+    }, 3500);
+
+
+  }
+
 }
+
+//let sound2 = document.getElementById('sound1');
+// sound2.src = './sounds/explosion_x.wav';
+// sound2.play();
+
+// const sound1 = document.getElementById('sound1');
+// sound1.src = './sounds/80s-music-synth-pop.mp3';
+// sound1.play();
