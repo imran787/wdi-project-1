@@ -1,16 +1,4 @@
-//pseudo----------
-//way to reveal tiles on initialisation for 1 sec then .8secs then .6 - reveal hideen image then quickly flip back
-// click handler when player clicks start game button - runs init function
-//init func sets up new game board - sets up random obstacles - shows hidden tiles with setTimout
-//player navigates by selecting one tile at a time which reveael.
-//obstacle landed on then game over . effect?
-//timer countdown - when reaches 0 game over or keep record of how long it takes and use that to keep score.
-//limit player moves only to adjacent tiles (r,l,u,d,and diagonal);
-//minimum of 2 tiles to chose max of 7.
-//find a way to limit moves only to active position
-//start point last col left top5, end first col right bot5;
-//game win logic!
-// each level up would add shake event
+
 
 
 let $divGrid;
@@ -25,7 +13,6 @@ let $message;
 let $you;
 let $cells;
 let $sweets;
-// let cellsArray;
 let counter;
 let seconds;
 let arrayOfObstacles;
@@ -33,7 +20,6 @@ let idSetter;
 const width = 10;
 const numOfObstacles = 24;
 const numOfSweets = 2;
-
 let arrayOfSweets;
 
 
@@ -91,7 +77,7 @@ function start() {
     $bombCells.removeClass('covering-top');
     $sweets.addClass('sweet');
     $sweets.removeClass('sweetReveal');
-  }, 3500);
+  }, 2500);
 
   $boardEnd = $('.cell[data-id="100"]');
   $boardEnd.addClass('door_close');
@@ -125,18 +111,6 @@ function gridCreate(num) {
     const arr = [randomNum,randomCell];
     arrayOfSweets[i] = arr;
   }
-  //create random points to reveal obstacles momentarily
-
-
-
-  // for(let i = 0; i < arrayOfHelp; i++){
-  //   const randomHelp = Math.floor(Math.random() * num);
-  //   const arr2  =[randomHelp];
-  //   arrayOfHelp[i] = arr2;
-  //   console.log(arrayOfHelp[i]);
-  // }
-
-
 
   // creates col + rows and randomly assigns obstacles to positions.
   for (let i = 0; i < num; i++) {
@@ -158,7 +132,7 @@ function gridCreate(num) {
         const newArr = arrayOfSweets[m];
         if (newArr[0] === i && newArr[1] === j) {
           $cell.addClass('sweet');
-          // console.log(`sweet added at row ${newArr[0]}, cell ${newArr[1]}`);
+
         }
       }
       $row.append($cell);
@@ -224,7 +198,7 @@ function moveCharacter(e) {
     $('#startGame').html('Restart?');
 
     //reset game board
-    // gameOver();
+
   } else if($you.hasClass('door_close')){
     clearInterval(counter);
     $seconds.html('');
@@ -251,17 +225,9 @@ function moveCharacter(e) {
       $bombCells.removeClass('covering-top');
       $sweets.addClass('sweet');
       $sweets.removeClass('sweetReveal');
-    }, 3500);
+    }, 2500);
 
 
   }
 
 }
-
-//let sound2 = document.getElementById('sound1');
-// sound2.src = './sounds/explosion_x.wav';
-// sound2.play();
-
-// const sound1 = document.getElementById('sound1');
-// sound1.src = './sounds/80s-music-synth-pop.mp3';
-// sound1.play();
